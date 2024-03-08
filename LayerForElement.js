@@ -1,7 +1,5 @@
 class LayerForElement{
     static instances = [];
-    wrap = null;
-    target = null;
 
 
     static syncPosAll(){
@@ -37,9 +35,15 @@ class LayerForElement{
     
 
 
+
+    wrap = null;
+    target = null;
+    lastShownTarget = null;
+
     constructor(wrap=null,target=null){
         this.wrap = wrap
         this.target = target
+        this.lastShownTarget = null;
         this.constructor.instances.push(this)
     }
 
@@ -54,8 +58,20 @@ class LayerForElement{
     }
     show(target=null){
         if(target){ this.target = target; this.syncPos();}
-        this.wrap.classList.add('on');
-        if(this.onshow instanceof Function) this.onshow(this);
+
+        if(this.lastShownTarget == this.target){
+        }else if(this.isShow){
+            this.wrap.classList.remove('on');
+            setTimeout(() => {
+                this.wrap.classList.add('on');
+                this.lastShownTarget = this.target;
+                if(this.onshow instanceof Function) this.onshow(this);
+            }, 1);
+        }else{
+            this.wrap.classList.add('on');
+            this.lastShownTarget = this.target;
+            if(this.onshow instanceof Function) this.onshow(this);
+        }        
     }
     onshow(lfe){
     }
@@ -67,8 +83,13 @@ class LayerForElement{
     }
     toggle(target=null){
         if(target){ this.target = target; this.syncPos();}
-        this.wrap.classList.toggle('on');
-        if(this.toggle instanceof Function) this.ontoggle(this);
+        if(this.lastShownTarget === this.target){
+            this.wrap.classList.toggle('on');
+            if(this.toggle instanceof Function) this.ontoggle(this);
+        }else {
+            this.show(target);
+        }
+        
     }
     ontoggle(lfe){
     }
@@ -88,9 +109,12 @@ class LayerForElement{
             width:rectTarget.width,
             height:rectTarget.height,
         }
-        this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px')
-        this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px')
-        this.wrap.style.setProperty('--wrap-width',rectWrap.width+'px')
-        this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')
+        setTimeout(()=>{
+            this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px')
+            this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px')
+            this.wrap.style.setProperty('--wrap-width',rectWrap.width+'px')
+            this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')
+        },10)
+        
     }
 }

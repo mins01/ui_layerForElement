@@ -11,6 +11,7 @@
     --wrap-height:auto;
 
     --transition-duration: 0.5s;
+    pointer-events: none;
 }
 .lfe-container .lfe-wrap{
     position: absolute;
@@ -111,31 +112,19 @@
 .lfe-container .lfe-wrap.lfe-wrap-motion-fade.on{
     opacity: 1;
 }
-.lfe-wrap.lfe-wrap-motion-fade .lfe-pos{
-    opacity: 0;
-}
-.lfe-wrap.lfe-wrap-motion-fade.on .lfe-pos{
-    opacity: 1;
-}
-.lfe-wrap.lfe-wrap-motion-fade .lfe-pos{
+.lfe-wrap.lfe-wrap-motion-fade.on{
     transition: opacity ease var(--transition-duration);
 }
 
-.lfe-container .lfe-wrap.lfe-wrap-motion-topdown{
+.lfe-container .lfe-wrap.lfe-wrap-motion-scale{
     display: block !important;
     opacity: 0;
+    transform: scale(0);
 }
-.lfe-container .lfe-wrap.lfe-wrap-motion-topdown.on{
+.lfe-container .lfe-wrap.lfe-wrap-motion-scale.on{
     opacity: 1;
+    transform: scale(1);
 }
-.lfe-wrap.lfe-wrap-motion-topdown .lfe-pos{
-    transform: translateY(-10px);
-    opacity: 0;
-}
-.lfe-wrap.lfe-wrap-motion-topdown.on .lfe-pos{
-    transform: translateY(0px);
-    opacity: 1;
-}
-.lfe-wrap.lfe-wrap-motion-topdown .lfe-pos{
+.lfe-wrap.lfe-wrap-motion-scale.on{
     transition: opacity ease var(--transition-duration) , transform ease var(--transition-duration);
 }

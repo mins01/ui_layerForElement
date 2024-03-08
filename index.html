@@ -75,6 +75,9 @@
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.hide(this)" >lfe1.hide(this)</button>
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.hide(this)" >lfe2.hide(this)</button>
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button><br>
@@ -100,10 +103,20 @@
             <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="out">data-lfe-pos="left"</button>
             <hr>
             <h3> data-lfe-pos-side="in"</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="top"  data-lfe-pos-side="in">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="right"  data-lfe-pos-side="in">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="bottom"  data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="left"  data-lfe-pos-side="in">data-lfe-pos="left"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
+            <hr>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
+            <hr>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
+            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
             <hr>
             <h2>small</h2>
             <h3> data-lfe-pos-side="out"</h3>
@@ -140,7 +153,7 @@
             <div class="lfe-pos">
                 <div class="lfe-layer" >
                     <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-primary" onclick="alert('NO.1')">NO.1</button>
                             <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                         </div>
@@ -152,7 +165,7 @@
             <div class="lfe-pos">
                 <div class="lfe-layer" >
                     <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-warning" onclick="alert('NO.2')">NO.2+FADE</button>
                             <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                         </div>
@@ -160,12 +173,12 @@
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap lfe-wrap-motion-topdown" id="wrap-3" data-lfe-pos="0">
+        <div class="lfe-wrap lfe-wrap-motion-scale" id="wrap-3" data-lfe-pos="0">
             <div class="lfe-pos">
                 <div class="lfe-layer" >
                     <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3+topdown</button>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3+scale</button>
                             <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                         </div>
                     </div>
