@@ -40,10 +40,16 @@ class LayerForElement{
     target = null;
     lastShownTarget = null;
 
+    defLfePos = "top";
+    defLfePosSide = "out";
+
     constructor(wrap=null,target=null){
         this.wrap = wrap
         this.target = target
         this.lastShownTarget = null;
+        this.defLfePos = "top";
+        this.defLfePosSide = "out";
+
         this.constructor.instances.push(this)
     }
 
@@ -60,18 +66,17 @@ class LayerForElement{
         if(target){ this.target = target; this.syncPos();}
 
         if(this.lastShownTarget == this.target){
+            return false;
         }else if(this.isShow){
             this.wrap.classList.remove('on');
-            setTimeout(() => {
-                this.wrap.classList.add('on');
-                this.lastShownTarget = this.target;
-                if(this.onshow instanceof Function) this.onshow(this);
-            }, 1);
         }else{
+
+        }        
+        setTimeout(() => {
             this.wrap.classList.add('on');
             this.lastShownTarget = this.target;
             if(this.onshow instanceof Function) this.onshow(this);
-        }        
+        }, 1);
     }
     onshow(lfe){
     }
@@ -99,8 +104,8 @@ class LayerForElement{
         let rectTarget = this.target.getBoundingClientRect();
         
 
-        this.wrap.dataset.lfePos = this.target.dataset.lfePos??'top';
-        this.wrap.dataset.lfePosSide = this.target.dataset.lfePosSide??'out';
+        this.wrap.dataset.lfePos = this.target.dataset.lfePos??this.defLfePos;
+        this.wrap.dataset.lfePosSide = this.target.dataset.lfePosSide??this.defLfePosSide;
         // let xyTarget = this.getXY(rect,this.wrap.dataset.lfePos)
 
         let rectWrap = {
