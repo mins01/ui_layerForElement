@@ -61,6 +61,7 @@ class LayerForElement{
         this.wrap.classList.toggle('on');
     }
     syncPos(){
+        if(!this.target) return false;
         let rectContainer = this.container.getBoundingClientRect();
         let rectTarget = this.target.getBoundingClientRect();
         
