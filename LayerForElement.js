@@ -69,6 +69,7 @@ class LayerForElement{
             return false;
         }else if(this.isShow){
             this.wrap.classList.remove('on');
+            this.lastShownTarget = null;
         }else{
 
         }        
@@ -76,12 +77,13 @@ class LayerForElement{
             this.wrap.classList.add('on');
             this.lastShownTarget = this.target;
             if(this.onshow instanceof Function) this.onshow(this);
-        }, 1);
+        }, 10);
     }
     onshow(lfe){
     }
     hide(){
         this.wrap.classList.remove('on');
+        this.lastShownTarget = null;
         if(this.onhide instanceof Function) this.onhide(this);
     }
     onhide(lfe){
@@ -114,12 +116,9 @@ class LayerForElement{
             width:rectTarget.width,
             height:rectTarget.height,
         }
-        setTimeout(()=>{
-            this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px')
-            this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px')
-            this.wrap.style.setProperty('--wrap-width',rectWrap.width+'px')
-            this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')
-        },10)
-        
+        this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px')
+        this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px')
+        this.wrap.style.setProperty('--wrap-width',rectWrap.width+'px')
+        this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')        
     }
 }
