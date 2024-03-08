@@ -48,17 +48,29 @@ class LayerForElement{
         if(!continer){throw new Error('.lfe-container is not exists') }
         return continer;
     }
+    get isShow(){
+        if(!this.wrap){throw new Error('wrap is not exists') }
+        return this.wrap.classList.contains('on');
+    }
     show(target=null){
         if(target){ this.target = target; this.syncPos();}
-        
         this.wrap.classList.add('on');
+        if(this.onshow instanceof Function) this.onshow(this);
+    }
+    onshow(lfe){
     }
     hide(){
         this.wrap.classList.remove('on');
+        if(this.onhide instanceof Function) this.onhide(this);
+    }
+    onhide(lfe){
     }
     toggle(target=null){
         if(target){ this.target = target; this.syncPos();}
         this.wrap.classList.toggle('on');
+        if(this.toggle instanceof Function) this.ontoggle(this);
+    }
+    ontoggle(lfe){
     }
     syncPos(){
         if(!this.target) return false;

@@ -9,21 +9,23 @@
     --wrap-left:auto;
     --wrap-width:auto;
     --wrap-height:auto;
+
+    --transition-duration: 0.5s;
 }
 .lfe-container .lfe-wrap{
     position: absolute;
     top:0;left:0;
     display: none;
     pointer-events: none;
-}
-.lfe-container .lfe-wrap.on{
-    display: block;
-    pointer-events: all;
 
     top:var(--wrap-top);
     left:var(--wrap-left);
     width:var(--wrap-width);
     height:var(--wrap-height);
+}
+.lfe-container .lfe-wrap.on{
+    display: block;
+
 }
 
 .debug .lfe-wrap{
@@ -85,12 +87,55 @@
     justify-content: flex-start;
 }
 
+/* 레이어 부분(콘텐츠) */
+
 .lfe-layer{
     flex: 0 0 auto;
+}
+.lfe-wrap.on .lfe-layer{
+    pointer-events: all;
 }
 
 .debug .lfe-layer{
     background-color: #99999999;
     outline: 1px dotted red;;
     outline-offset: 0px;
+}
+
+
+/* 모션을 위한 추가 처리 */
+.lfe-container .lfe-wrap.lfe-wrap-motion-fade{
+    display: block !important;
+    opacity: 0;
+}
+.lfe-container .lfe-wrap.lfe-wrap-motion-fade.on{
+    opacity: 1;
+}
+.lfe-wrap.lfe-wrap-motion-fade .lfe-pos{
+    opacity: 0;
+}
+.lfe-wrap.lfe-wrap-motion-fade.on .lfe-pos{
+    opacity: 1;
+}
+.lfe-wrap.lfe-wrap-motion-fade .lfe-pos{
+    transition: opacity ease var(--transition-duration);
+}
+
+.lfe-container .lfe-wrap.lfe-wrap-motion-topdown{
+    display: block !important;
+    opacity: 0;
+}
+.lfe-container .lfe-wrap.lfe-wrap-motion-topdown.on{
+    opacity: 1;
+}
+.lfe-wrap.lfe-wrap-motion-topdown .lfe-pos{
+    transform: translateY(-10px);
+    opacity: 0;
+}
+.lfe-wrap.lfe-wrap-motion-topdown.on .lfe-pos{
+    transform: translateY(0px);
+    opacity: 1;
+}
+.lfe-wrap.lfe-wrap-motion-topdown .lfe-pos{
+    transition: opacity ease var(--transition-duration) , transform ease var(--transition-duration);
 }
