@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+.lfe-container{
+    position: absolute;
+    top:0;left:0;
+    overflow: visible;
+
+    --wrap-top:auto;
+    --wrap-left:auto;
+    --wrap-width:auto;
+    --wrap-height:auto;
+}
+.lfe-container .lfe-wrap{
+    position: absolute;
+    top:0;left:0;
+    display: none;
+    pointer-events: none;
+}
+.lfe-container .lfe-wrap.on{
+    display: block;
+    pointer-events: all;
+
+    top:var(--wrap-top);
+    left:var(--wrap-left);
+    width:var(--wrap-width);
+    height:var(--wrap-height);
+}
+
+.debug .lfe-wrap{
+    background-color: #aabbcc33;
+    outline: 2px dotted #000;;
+    outline-offset: 0px;
+}
+
+
+.lfe-pos{
+    position: absolute;
+    left:0;right:0;top:0;bottom:0;
+    overflow: visible;
+    width:auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;    
+}
+.lfe-wrap[data-lfe-pos="top"] .lfe-pos{
+    left:0;right:0;top: auto;bottom: 100%;
+    /* align-content: flex-start; */
+    justify-content: center;
+    align-items: flex-end;
+}
+.lfe-wrap[data-lfe-pos="right"] .lfe-pos{
+    left:100%;right:auto;top:0;bottom:0;
+    flex-wrap: nowrap;
+    /* align-content: center; */
+    justify-content: flex-start;
+    align-items: center;
+}
+.lfe-wrap[data-lfe-pos="bottom"] .lfe-pos{
+    left:0;right:0;top: 100%;bottom: auto;
+    flex-wrap: nowrap;
+    /* align-content: flex-start; */
+    justify-content: center;
+    align-items: flex-end;
+}
+.lfe-wrap[data-lfe-pos="left"] .lfe-pos{
+    left:auto;right:100%;top:0;bottom:0;
+    flex-wrap: nowrap;
+    /* align-content: center; */
+    justify-content: flex-end;
+    align-items: center;
+}
+.lfe-wrap[data-lfe-pos-side="in"] .lfe-pos{
+    left:0;right:0;top: 0;bottom: 0;
+}
+.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="top"] .lfe-pos{
+    align-items: flex-start;
+}
+.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="right"] .lfe-pos{
+    justify-content: flex-end;
+}
+.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="bottom"] .lfe-pos{
+    align-items: flex-end;
+}
+.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="left"] .lfe-pos{
+    justify-content: flex-start;
+}
+
+.lfe-layer{
+    flex: 0 0 auto;
+}
+
+.debug .lfe-layer{
+    background-color: #99999999;
+    outline: 1px dotted red;;
+    outline-offset: 0px;
+}

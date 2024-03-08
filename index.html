@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko" >
+<head>
+    <title>layer for element</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="http://www.mins01.com/favicon.ico"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="/js/ForGoogle.js"></script>
+    <!-- google analytics -->
+    <script>if(window.ForGoogle){ ForGoogle.analytics() }else{ console.log("failure : ForGoogle.analytics()");}</script>
+    
+
+    <!-- jquery 관련 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script> -->
+
+    <!-- 부트스트랩 5.3.x -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
+    <!-- vue.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    
+    <!-- meta og -->
+    
+    <meta property="og:title" content="layer for element">
+    <meta property="og:description" content="layer for element">
+    <meta name="og:image" content="http://www.mins01.com/img/logo.gif">
+    <meta property="og:image:width" content="190">
+    <meta property="og:image:height" content="70" />
+    <meta property="og:site_name" content="layer for element" />
+    <meta property="og:type" content="website">
+    
+    <!-- //meta og -->
+    <link rel="stylesheet" href="lfe.css">
+    <script src="LayerForElement.js"></script>
+    <script>
+        window.addEventListener('load',(event)=>{
+            LayerForElement.autoSync()
+            globalThis.lfe1 = new LayerForElement(document.querySelector('#wrap-1'));
+            globalThis.lfe2 = new LayerForElement(document.querySelector('#wrap-2'));
+            globalThis.lfe3 = new LayerForElement(document.querySelector('#wrap-3'));
+        })
+    </script>
+</head>
+<body class="debug" >
+    <div class="container" >
+        <h1>layer for element</h1>
+        <h3></h3>
+        <hr>
+        <button type="button" class="btn btn-primary" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
+        <button type="button" class="btn btn-primary" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
+        <button type="button" class="btn btn-primary" onclick="LayerForElement.hideAll()" > LayerForElement.hideAll() </button>
+        <button type="button" class="btn btn-primary" onclick="LayerForElement.toggleAll()" > LayerForElement.toggleAll() </button>
+        <hr>
+        <div>
+            <button type="button" class="btn btn-info" onclick="lfe1.show()">lfe1.show()</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.hide()">lfe1.hide()</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.toggle()">lfe1.toggle()</button>
+            <hr>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="top">data-lfe-pos="top"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="right">data-lfe-pos="right"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="bottom">data-lfe-pos="bottom"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="left">data-lfe-pos="left"</button>
+            <hr>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="top"  data-lfe-pos-side="in">data-lfe-pos="top"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="right"  data-lfe-pos-side="in">data-lfe-pos="right"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="bottom"  data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
+            <button type="button" class="btn btn-info" onclick="lfe1.show(this)" data-lfe-pos="left"  data-lfe-pos-side="in">data-lfe-pos="left"</button>
+            <hr>
+            <h3>small</h3>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="top">top</button>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="right">right</button>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="bottom">bottom</button>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="left">left</button>
+            <h3>multiple</h3>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe1.show(this)">1</button>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe2.show(this)">2</button>
+            <button type="button" class="btn btn-info btn-sm mx-5" onclick="lfe3.show(this)">3</button>
+        </div>
+    </div>
+    <div class="lfe-container">
+        컨테이너
+        <div class="lfe-wrap on" id="wrap-1" data-lfe-pos="0">
+            <div class="lfe-pos">
+                <div class="lfe-layer" >
+                    <div class="m-1">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary" onclick="alert('NO.1')">NO.1</button>
+                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lfe-wrap" id="wrap-2" data-lfe-pos="0">
+            <div class="lfe-pos">
+                <div class="lfe-layer" >
+                    <div class="m-1">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-warning" onclick="alert('NO.2')">NO.2</button>
+                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lfe-wrap" id="wrap-3" data-lfe-pos="0">
+            <div class="lfe-pos">
+                <div class="lfe-layer" >
+                    <div class="m-1">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3</button>
+                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
