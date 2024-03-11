@@ -36,18 +36,7 @@
     <meta property="og:type" content="website">
     
     <!-- //meta og -->
-    <style>
-        /* 커스텀 예제 */
-        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] { left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: flex-end; }
-        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] .lfe-layer{
-            width:100%;height:50%; text-align: center; background-color: #000;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+
     <link rel="stylesheet" href="lfe.css">
     <script src="LayerForElement.js"></script>
     <script>
@@ -83,6 +72,36 @@
             
         })
     </script>
+    <style>
+        /* 커스텀 예제 */
+        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] { 
+            left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: flex-end; padding:10px;
+        }
+        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] .lfe-layer{
+            width:100%;height:50%; text-align: center; background-color: red;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        /* 커스텀 예제 - 모션*/
+        .lfe-container .lfe-wrap.custom-1{
+            display: block !important;
+            opacity: 0;
+            transform: scale(0);
+            transform-origin: center bottom;
+        }
+        .lfe-container .lfe-wrap.custom-1.on{
+            opacity: 1;
+            transform: scale(1);
+        }
+        .lfe-wrap.custom-1.on{
+            transition: all cubic-bezier(1.000, -0.5, 0.150, 2) calc(var(--transition-duration) * 2);
+        }
+    </style>
 </head>
 <body class="debug" >
     <div class="container" >
@@ -192,7 +211,7 @@
             </div>
             <hr>
             <h3>커스텀</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.show(this)" data-lfe-pos="center"  data-lfe-pos-side="in"
+            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.toggle(this)" data-lfe-pos="center"  data-lfe-pos-side="in"
             style="width:100vh; max-width:400px;height:100vh; max-height:400px;">커스텀</button>
             <hr>
 
@@ -376,7 +395,7 @@
             </div>
         </div>
 
-        <div class="lfe-wrap" id="wrap-custom-1">
+        <div class="lfe-wrap custom-1" id="wrap-custom-1">
             <div class="lfe-pos" data-lfe-pos="custom-1" data-lfe-pos-side="custom-1">
                 <div class="lfe-layer" >
                     <div class="m-1">

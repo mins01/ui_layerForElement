@@ -23,9 +23,27 @@ class LayerForElement{
         });
     }
     static hideFromElement(element){
+        
+        let lfe = this.searchFromElement(element);
+        if(lfe) lfe.hide();
+        else{
+            let wrap = element.closest('.lfe-wrap');
+            if(!wrap) return false;
+            wrap.classList.remove('on');
+        }
+    }
+    static searchFromElement(element){
         let wrap = element.closest('.lfe-wrap');
-        if(!wrap) return false;
-        wrap.classList.remove('on');
+        if(!wrap) return null;
+        for(let i=0,m=this.instances.length;i<m;i++){
+            const lfe = this.instances[i];
+            if(!lfe) continue;
+            if(lfe.wrap === wrap ){
+                // console.log('wrap 찾음',lfe);
+                return lfe;
+            }
+        }
+        return false;
     }
     static autoSync(){
         window.addEventListener('resize',(event)=>{
