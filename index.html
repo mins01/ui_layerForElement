@@ -36,6 +36,18 @@
     <meta property="og:type" content="website">
     
     <!-- //meta og -->
+    <style>
+        /* 커스텀 예제 */
+        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] { left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: flex-end; }
+        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] .lfe-layer{
+            width:100%;height:50%; text-align: center; background-color: #000;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
     <link rel="stylesheet" href="lfe.css">
     <script src="LayerForElement.js"></script>
     <script>
@@ -65,6 +77,10 @@
             globalThis.lfeFixedIn3 = new LayerForElement(document.querySelector('#wrap-fixed-in-3'));
             globalThis.lfeFixedIn4 = new LayerForElement(document.querySelector('#wrap-fixed-in-4'));
             globalThis.lfeFixedIn5 = new LayerForElement(document.querySelector('#wrap-fixed-in-5'));
+
+            globalThis.lfeCustom1 = new LayerForElement(document.querySelector('#wrap-custom-1'));
+
+            
         })
     </script>
 </head>
@@ -78,7 +94,7 @@
         <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.hideAll()" > LayerForElement.hideAll() </button>
         <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.toggleAll()" > LayerForElement.toggleAll() </button>
         <hr>
-        <div>
+        <div class="text-center">
             <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.show()">lfe1.show()</button>
             <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.hide()">lfe1.hide()</button>
             <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.toggle()">lfe1.toggle()</button>
@@ -175,6 +191,11 @@
                 data-lfe-pos="right" data-lfe-pos-side="out" style="width:100vh; max-width:600px;height:100vh; max-height:600px;">위치 강제 테스트 - in</button>
             </div>
             <hr>
+            <h3>커스텀</h3>
+            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.show(this)" data-lfe-pos="center"  data-lfe-pos-side="in"
+            style="width:100vh; max-width:400px;height:100vh; max-height:400px;">커스텀</button>
+            <hr>
+
             <div style="height: 100vh;"></div>
             <h3>with scroll</h3>
             <hr>
@@ -348,6 +369,19 @@
                     <div class="m-1">
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-center</button>
+                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lfe-wrap" id="wrap-custom-1">
+            <div class="lfe-pos" data-lfe-pos="custom-1" data-lfe-pos-side="custom-1">
+                <div class="lfe-layer" >
+                    <div class="m-1">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">custom</button>
                             <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                         </div>
                     </div>
