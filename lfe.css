@@ -112,9 +112,13 @@
     left:var(--wrap-left);
     top:var(--wrap-top);
 }
-:where(.lfe-container .lfe-wrap[data-lfe-wrap-caged]:not([data-lfe-wrap-caged="false"])),
+.lfe-container .lfe-wrap[data-lfe-wrap-caged]:not([data-lfe-wrap-caged="false"]),
 :is(.lfe-container .lfe-wrap.lfe-wrap-caged){
     left:clamp(calc(0px + var(--wrap-caged-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-caged-margin)));
+
+    /* left:min(max(calc(0px + var(--wrap-caged-margin)),var(--wrap-left)), calc(100vw - var(--wrap-width) - var(--wrap-caged-margin))); */
+    /* left:max(0px,var(--wrap-left)); */
+
     top:clamp(calc(0px + var(--wrap-caged-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-caged-margin)));
 }
 

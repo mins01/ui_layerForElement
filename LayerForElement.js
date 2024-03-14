@@ -50,6 +50,11 @@ class LayerForElement{
             this.syncPosAll();
         })
         window.addEventListener('scroll',(event)=>{
+            console.log('scroll');
+            this.syncPosAll();
+        })
+        window.addEventListener('touchmove',(event)=>{
+            console.log('touchmove');
             this.syncPosAll();
         })
     }

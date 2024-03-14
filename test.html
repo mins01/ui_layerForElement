@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko" >
+<head>
+    <title>layer for element</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="http://www.mins01.com/favicon.ico"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="/js/ForGoogle.js"></script>
+    <!-- google analytics -->
+    <script>if(window.ForGoogle){ ForGoogle.analytics() }else{ console.log("failure : ForGoogle.analytics()");}</script>
+    
+
+    <!-- jquery 관련 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script> -->
+
+    <!-- 부트스트랩 5.3.x -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
+    <!-- vue.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    
+    <!-- meta og -->
+    
+    <meta property="og:title" content="layer for element">
+    <meta property="og:description" content="layer for element">
+    <meta name="og:image" content="http://www.mins01.com/img/logo.gif">
+    <meta property="og:image:width" content="190">
+    <meta property="og:image:height" content="70" />
+    <meta property="og:site_name" content="layer for element" />
+    <meta property="og:type" content="website">
+    
+    <!-- //meta og -->
+
+    <link rel="stylesheet" href="lfe.css">
+    <script src="LayerForElement.js"></script>
+    <script>
+        window.addEventListener('load',(event)=>{
+            LayerForElement.autoSync()
+            globalThis.lfe1 = new LayerForElement(document.querySelector('#wrap-1'));
+        });
+    </script>
+</head>
+<body class="debug" >
+    
+    <div class="container-fluid m-0 p-0" style="overflow: scroll; height: 600px;" >
+        <div class="container oveflow-scroll" style="width: 900px;" >
+            <h1>layer for element</h1>
+            <hr>
+            element 에 layer를 위치 시킨다.<br>
+            .lfe-wrap-caged or [data-lfe-wrap-caged] 으로 화면을 벗어나지 않게 할 수 있다.<br>
+            <hr>
+            <div>
+                <a class="btn btn-link" href="old/20240314/index.html">old</a>
+            </div>
+            
+            <div >
+                <div class="text-center" >
+                    <hr>
+                    <button type="button" class="m-1 btn btn-info" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
+                    <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
+                    <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.hideAll()" > LayerForElement.hideAll() </button>
+                    <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.toggleAll()" > LayerForElement.toggleAll() </button>
+                    <hr>
+                    <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.show()">lfe1.show()</button>
+                    <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.hide()">lfe1.hide()</button>
+                    <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.toggle()">lfe1.toggle()</button>
+                    <hr>
+                    <h3> simple(no data-*)</h3>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.hide(this)" >lfe1.hide(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.hide(this)" >lfe2.hide(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button><br>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" >lfe1.toggle(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" >lfe2.toggle(this)</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" >lfe3.toggle(this)</button>
+        
+                    <hr>
+                    <h3> data-lfe-wrap-side="out" (default)</h3>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
+                    <hr>
+
+                    <h3> data-lfe-wrap-side="in"</h3>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                    <hr>
+
+        
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="lfe-container">
+        컨테이너
+        <div class="lfe-wrap lfe-wrap-caged" id="wrap-1">
+            <div class="lfe-layer" >
+                <div class="m-1 text-center" style="width:300px">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">NO.1</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

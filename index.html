@@ -112,18 +112,21 @@
         }
     </style>
 </head>
-<body class="debug" >
+<body class="debug "  >
     
     <div class="container-fluid m-0 p-0" >
-        <div class="container" style="min-width: 800px;" >
+        <div class="container">
             <h1>layer for element</h1>
             <hr>
-            element 에 layer를 위치 시킨다.<br>
-            .lfe-wrap-caged or [data-lfe-wrap-caged] 으로 화면을 벗어나지 않게 할 수 있다.<br>
+            <ul>
+                <li>element 에 layer를 위치 시킨다.</li>
+                <li>.lfe-wrap-caged or [data-lfe-wrap-caged] 으로 화면을 벗어나지 않게 할 수 있다.</li>
+                <li>.lfe-wrap-caged or [data-lfe-wrap-caged] 은 모바일 웹에서 device-width 가 넘어가는 페이지인 경우 이상 동작한다.</li>
+            </ul>
+            <br>
+            
             <hr>
-            <div>
-                <a class="btn btn-link" href="old/20240314/index.html">old</a>
-            </div>
+            
             <hr>
             <button type="button" class="m-1 btn btn-info" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
             <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
@@ -138,16 +141,23 @@
                 <h3> simple(no data-*)</h3>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.show(this)" >lfeCaged.show(this)</button>
+                <br>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.show(this)" >lfeCaged.show(this)</button>
+                <br>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.hide(this)" >lfe1.hide(this)</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.hide(this)" >lfe2.hide(this)</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.hide(this)" >lfeCaged.hide(this)</button>
+                <br>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" >lfe1.toggle(this)</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" >lfe2.toggle(this)</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" >lfe3.toggle(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" >lfeCaged.toggle(this)</button>
     
                 <hr>
                 <h3> data-lfe-wrap-side="out" (default)</h3>
@@ -202,6 +212,7 @@
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                
                 <hr>
                 <h2>small</h2>
                 <h3> data-lfe-wrap-side="out"</h3>
@@ -228,7 +239,7 @@
                         lfeFixed4.toggle(this);
                         lfeFixed5.toggle(this);
                     " 
-                    data-lfe-wrap="right" style="width:100vh; max-width:400px;height:100vh; max-height:400px;">위치 강제 테스트</button>
+                    data-lfe-wrap="right" style="width: 80vmin; aspect-ratio: 1/1; ">위치 강제 테스트</button>
                 </div>
                 <div class="p-3 text-center">
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" 
@@ -239,19 +250,19 @@
                         lfeFixedIn4.toggle(this);
                         lfeFixedIn5.toggle(this);
                     " 
-                    data-lfe-wrap="right" data-lfe-wrap-side="out" style="width:100vh; max-width:600px;height:100vh; max-height:600px;">위치 강제 테스트 - in</button>
+                    data-lfe-wrap="right" data-lfe-wrap-side="out" style="width: 80vmin; aspect-ratio: 1/1; ">위치 강제 테스트 - in</button>
                 </div>
                 <hr>
                 <h3>커스텀</h3>
-                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.toggle(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in"
-                style="width:100vh; max-width:400px;height:100vh; max-height:400px;">커스텀</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm" onclick="lfeCustom1.toggle(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in"
+                style="width: 80vmin; aspect-ratio: 1/1; ">커스텀</button>
                 <hr>
     
                 <div style="height: 100vh;"></div>
                 
                 <h3>with scroll</h3>
                 <hr>
-                <div style="transform: translateX(+200vw);">
+                <div >
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top">data-lfe-wrap="top"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right">data-lfe-wrap="right"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
@@ -260,7 +271,7 @@
                 </div>
                 
                 <hr>
-                <div style="transform: translateX(+200vw);">
+                <div >
 
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
@@ -270,7 +281,7 @@
                 </div>
                 <h3>with scroll and [data-lfe-wrap-caged]</h3>
                 <hr>
-                <div style="transform: translateX(+200vw);">
+                <div >
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="top">data-lfe-wrap="top"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="right">data-lfe-wrap="right"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
@@ -279,7 +290,7 @@
                 </div>
                 
                 <hr>
-                <div style="transform: translateX(+200vw);">
+                <div >
 
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
                     <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
@@ -292,10 +303,10 @@
             </div>
         </div>
         
-
+<!-- 
         <div class="m-0" style="width: 200vw; height: 200vh; background-color: #9999; padding:20px;">
             스크롤을 위한 영역
-        </div>
+        </div> -->
     </div>
 
     <div class="lfe-container">
@@ -335,7 +346,7 @@
             <div class="lfe-layer" >
                 <div class="m-1">
                     <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" class="btn btn-success" onclick="alert(this.textContent)">NO.caged</button>
+                        <button type="button" class="btn btn-info" onclick="alert(this.textContent)">caged</button>
                         <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
