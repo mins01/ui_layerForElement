@@ -100,10 +100,12 @@ class LayerForElement{
             this.lastShownTarget = null;
         }else{
 
-        }        
+        }
+        this.lastShownTarget = this.target;     
+
         setTimeout(() => {
+            console.log('on');  
             this.wrap.classList.add('on');
-            this.lastShownTarget = this.target;
             if(this.onshow instanceof Function) this.onshow(this);
         }, 10);
     }
@@ -119,9 +121,12 @@ class LayerForElement{
     toggle(target=null){
         if(target){ this.target = target; }
         if(this.lastShownTarget === this.target){
-            this.wrap.classList.toggle('on');
             this.syncPos();
-            if(this.toggle instanceof Function) this.ontoggle(this);
+            setTimeout(() => {
+                this.wrap.classList.toggle('on');
+                if(this.toggle instanceof Function) this.ontoggle(this);
+            }, 10);
+
         }else {
             this.show(target);
         }
@@ -134,7 +139,8 @@ class LayerForElement{
         // let rectContainer = this.container.getBoundingClientRect();
         let rectTarget = this.target.getBoundingClientRect();
         let rectWrap = this.wrap.getBoundingClientRect();
-        console.log(rectWrap);
+        console.log('rectTarget',rectTarget);
+        console.log('rectWrap',rectWrap);
 
         const wrapFixed = this.wrap.classList.contains('lef-wrap-fixed');
 

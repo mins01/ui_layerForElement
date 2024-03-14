@@ -19,7 +19,7 @@
     --wrap-height:0px;
     --wrap-right:0px;/* 자동계산 */
     --wrap-bottom:0px;/* 자동계산 */
-    --wrap-margin:20px;
+    --wrap-caged-margin:20px; /* caged 상태에서 margin */
 
     --transition-duration: 0.5s;
     pointer-events: none;
@@ -58,79 +58,49 @@
 }
 
 
-.lfe-container .lfe-wrap[data-lfe-wrap="top"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="top"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-top){
     --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
     --wrap-top:calc(var(--target-top) - var(--wrap-height));
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="bottom"]{
+.lfe-container .lfe-wrap[data-lfe-wrap="bottom"],
+:is(.lfe-container .lfe-wrap.lfe-wrap-bottom){
     --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
     --wrap-top:calc(var(--target-top) + var(--target-height));
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="left"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="left"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-left){
     --wrap-left:calc(var(--target-left) - var(--wrap-width));
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="right"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="right"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-right){
     --wrap-left:calc(var(--target-left) + var(--target-width));
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="center"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="center"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-center){
     --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
 
-.lfe-container .lfe-wrap[data-lfe-wrap="top"][data-lfe-wrap-side="in"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="top"][data-lfe-wrap-side="in"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-top.lfe-wrap-side-in){
     --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
     --wrap-top:calc(var(--target-top));
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="bottom"][data-lfe-wrap-side="in"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="bottom"][data-lfe-wrap-side="in"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-bottom.lfe-wrap-side-in){
     --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
     --wrap-top:calc(var(--target-top) + var(--target-height) - var(--wrap-height));
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="left"][data-lfe-wrap-side="in"]{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="left"][data-lfe-wrap-side="in"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-left.lfe-wrap-side-in){
     --wrap-left:calc(var(--target-left));
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
-.lfe-container .lfe-wrap[data-lfe-wrap="right"][data-lfe-wrap-side="in"]{
-    --wrap-left:calc(var(--target-left) + var(--target-width)  - var(--wrap-width));
-    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
-}
-
-/* 고정 설정. data-lfe-wrap ,data-lfe-wrap-side 보다 우선 */
-.lfe-container .lfe-wrap.lfe-wrap-top{
-    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
-    --wrap-top:calc(var(--target-top) - var(--wrap-height));
-}
-.lfe-container .lfe-wrap.lfe-wrap-bottom{
-    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
-    --wrap-top:calc(var(--target-top) + var(--target-height));
-}
-.lfe-container .lfe-wrap.lfe-wrap-left{
-    --wrap-left:calc(var(--target-left) - var(--wrap-width));
-    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
-}
-.lfe-container .lfe-wrap.lfe-wrap-right{
-    --wrap-left:calc(var(--target-left) + var(--target-width));
-    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
-}
-.lfe-container .lfe-wrap.lfe-wrap-center{
-    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
-    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
-}
-
-.lfe-container .lfe-wrap.lfe-wrap-top.lfe-wrap-side-in{
-    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
-    --wrap-top:calc(var(--target-top));
-}
-.lfe-container .lfe-wrap.lfe-wrap-bottom.lfe-wrap-side-in{
-    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
-    --wrap-top:calc(var(--target-top) + var(--target-height) - var(--wrap-height));
-}
-.lfe-container .lfe-wrap.lfe-wrap-left.lfe-wrap-side-in{
-    --wrap-left:calc(var(--target-left));
-    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
-}
-.lfe-container .lfe-wrap.lfe-wrap-right.lfe-wrap-side-in{
+:where(.lfe-container .lfe-wrap[data-lfe-wrap="right"][data-lfe-wrap-side="in"]),
+:is(.lfe-container .lfe-wrap.lfe-wrap-right.lfe-wrap-side-in){
     --wrap-left:calc(var(--target-left) + var(--target-width)  - var(--wrap-width));
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
@@ -142,10 +112,10 @@
     left:var(--wrap-left);
     top:var(--wrap-top);
 }
-.lfe-container .lfe-wrap[data-lfe-wrap-caged]:not([data-lfe-wrap-caged="false"]),
-.lfe-container .lfe-wrap.lfe-wrap-caged{
-    left:clamp(calc(0px + var(--wrap-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-margin)));
-    top:clamp(calc(0px + var(--wrap-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-margin)));
+:where(.lfe-container .lfe-wrap[data-lfe-wrap-caged]:not([data-lfe-wrap-caged="false"])),
+:is(.lfe-container .lfe-wrap.lfe-wrap-caged){
+    left:clamp(calc(0px + var(--wrap-caged-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-caged-margin)));
+    top:clamp(calc(0px + var(--wrap-caged-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-caged-margin)));
 }
 
 
