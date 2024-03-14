@@ -49,9 +49,6 @@ class LayerForElement{
         window.addEventListener('resize',(event)=>{
             this.syncPosAll();
         })
-        window.addEventListener('scroll',(event)=>{
-            this.syncPosAll();
-        })
     }
     
 
@@ -61,22 +58,17 @@ class LayerForElement{
     target = null;
     lastShownTarget = null;
 
-    defLfeWrap = "top";
-    defLfeWrapSide = "out";
+    defLfePos = "top";
+    defLfePosSide = "out";
 
     constructor(wrap=null,target=null){
         this.wrap = wrap
         this.target = target
         this.lastShownTarget = null;
-        this.defLfeWrap = "top";
-        this.defLfeWrapSide = "out";
+        this.defLfePos = "top";
+        this.defLfePosSide = "out";
 
         this.constructor.instances.push(this)
-
-        //모션이 있을 경우 크기등이 틀어질 경우 대비
-        this.wrap.addEventListener('transitionstart',(event)=>{
-            this.syncPos();
-        })
     }
 
     get container(){
@@ -115,10 +107,9 @@ class LayerForElement{
     onhide(lfe){
     }
     toggle(target=null){
-        if(target){ this.target = target; }
+        if(target){ this.target = target; this.syncPos();}
         if(this.lastShownTarget === this.target){
             this.wrap.classList.toggle('on');
-            this.syncPos();
             if(this.toggle instanceof Function) this.ontoggle(this);
         }else {
             this.show(target);
@@ -129,24 +120,23 @@ class LayerForElement{
     }
     syncPos(){
         if(!this.target) return false;
-        // let rectContainer = this.container.getBoundingClientRect();
+        let rectContainer = this.container.getBoundingClientRect();
         let rectTarget = this.target.getBoundingClientRect();
-        let rectWrap = this.wrap.getBoundingClientRect();
-        console.log(rectWrap);
+        
 
-        const wrapFixed = this.wrap.classList.contains('lef-wrap-fixed');
+        this.wrap.dataset.lfePos = this.target.dataset.lfePos??this.defLfePos;
+        this.wrap.dataset.lfePosSide = this.target.dataset.lfePosSide??this.defLfePosSide;
+        // let xyTarget = this.getXY(rect,this.wrap.dataset.lfePos)
 
-        this.wrap.dataset.lfeWrap = this.target.dataset.lfeWrap??this.defLfeWrap;
-        this.wrap.dataset.lfeWrapSide = this.target.dataset.lfeWrapSide??this.defLfeWrapSide;
-
-        this.wrap.style.setProperty('--target-top',rectTarget.top+'px')
-        this.wrap.style.setProperty('--target-left',rectTarget.left+'px')
-        this.wrap.style.setProperty('--target-width',rectTarget.width+'px')
-        this.wrap.style.setProperty('--target-height',rectTarget.height+'px')
-
-        // this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px') //자동 계산
-        // this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px') //자동 계산
+        let rectWrap = {
+            top:rectTarget.top - rectContainer.top,
+            left:rectTarget.left - rectContainer.left,
+            width:rectTarget.width,
+            height:rectTarget.height,
+        }
+        this.wrap.style.setProperty('--wrap-top',rectWrap.top+'px')
+        this.wrap.style.setProperty('--wrap-left',rectWrap.left+'px')
         this.wrap.style.setProperty('--wrap-width',rectWrap.width+'px')
-        this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')
+        this.wrap.style.setProperty('--wrap-height',rectWrap.height+'px')        
     }
 }

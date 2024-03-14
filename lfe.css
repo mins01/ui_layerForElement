@@ -5,30 +5,41 @@
     top:0;left:0;
     overflow: visible;
 
-    --wrap-top:auto;
-    --wrap-left:auto;
-    --wrap-width:auto;
-    --wrap-height:auto;
+
+    --target-top:0px;
+    --target-left:0px;
+    --target-width:0px;
+    --target-height:0px;
+    --target-right:0px;/* 자동계산 */
+    --target-bottom:0px;/* 자동계산 */
+
+    --wrap-top:0px; /* 자동계산 */
+    --wrap-left:0px; /* 자동계산 */
+    --wrap-width:0px;
+    --wrap-height:0px;
+    --wrap-right:0px;/* 자동계산 */
+    --wrap-bottom:0px;/* 자동계산 */
+    --wrap-margin:20px;
 
     --transition-duration: 0.5s;
     pointer-events: none;
 }
 .lfe-container .lfe-wrap{
-    position: absolute;
+    position: fixed;
     top:0;left:0;
-    display: none;
+    /* display: none; */
+    /* visibility: hidden; */
+    opacity: 0;
     pointer-events: none;
 
-    top:var(--wrap-top);
-    left:var(--wrap-left);
-    width:var(--wrap-width);
-    height:var(--wrap-height);
-}
-.lfe-container .lfe-wrap.on{
-    display: block;
+    --target-right:calc( var(--target-left) + var(--target-width));
+    --target-bottom:calc( var(--target-top) + var(--target-height));
+    --wrap-right:calc( var(--wrap-left) + var(--wrap-width));
+    --wrap-bottom:calc( var(--wrap-top) + var(--wrap-height));
 
+    left:clamp(calc(0px + var(--wrap-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-margin)));
+    top:clamp(calc(0px + var(--wrap-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-margin)));
 }
-
 .debug .lfe-wrap{
     background-color: #aabbcc33;
     outline: 2px dotted #000;;
@@ -36,86 +47,120 @@
 }
 
 
-.lfe-pos{
-    position: absolute;
-    left:0;right:0;top:0;bottom:0;
-    overflow: visible;
-    width:auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;    
+.lfe-container .lfe-wrap.on{
+    /* display: block; */
+    /* visibility: visible; */
+    opacity: 1;
 }
-.lfe-wrap[data-lfe-pos="top"] .lfe-pos { left:0;right:0;top: auto;bottom: 100%; justify-content: center; align-items: flex-end; }
-.lfe-wrap[data-lfe-pos="right"] .lfe-pos { left:100%;right:auto;top:0;bottom:0; justify-content: flex-start; align-items: center; }
-.lfe-wrap[data-lfe-pos="bottom"] .lfe-pos { left:0;right:0;top: 100%;bottom: auto; justify-content: center; align-items: flex-end; }
-.lfe-wrap[data-lfe-pos="left"] .lfe-pos { left:auto;right:100%;top:0;bottom:0; justify-content: flex-end; align-items: center; }
-.lfe-wrap[data-lfe-pos="center"] .lfe-pos { left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: center; }
-.lfe-wrap .lfe-pos[data-lfe-pos="top"]{ left:0;right:0;top: auto;bottom: 100%; justify-content: center; align-items: flex-end; }
-.lfe-wrap .lfe-pos[data-lfe-pos="right"]{ left:100%;right:auto;top:0;bottom:0; justify-content: flex-start; align-items: center; }
-.lfe-wrap .lfe-pos[data-lfe-pos="bottom"]{ left:0;right:0;top: 100%;bottom: auto; justify-content: center; align-items: flex-end; }
-.lfe-wrap .lfe-pos[data-lfe-pos="left"]{ left:auto;right:100%;top:0;bottom:0; justify-content: flex-end; align-items: center; }
-.lfe-wrap .lfe-pos[data-lfe-pos="center"]{ left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: center; }
-
-
-
-.lfe-wrap[data-lfe-pos-side="in"] .lfe-pos ,
-.lfe-wrap .lfe-pos[data-lfe-pos-side="in"]{
-    left:0;right:0;top: 0;bottom: 0;
-}
-.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="top"] .lfe-pos ,
-.lfe-wrap .lfe-pos[data-lfe-pos-side="in"][data-lfe-pos="top"]{
-    align-items: flex-start;
-}
-.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="right"] .lfe-pos ,
-.lfe-wrap .lfe-pos[data-lfe-pos-side="in"][data-lfe-pos="right"]{
-    justify-content: flex-end;
-}
-.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="bottom"] .lfe-pos ,
-.lfe-wrap .lfe-pos[data-lfe-pos-side="in"][data-lfe-pos="bottom"]{
-    align-items: flex-end;
-}
-.lfe-wrap[data-lfe-pos-side="in"][data-lfe-pos="left"] .lfe-pos ,
-.lfe-wrap .lfe-pos[data-lfe-pos-side="in"][data-lfe-pos="left"]{
-    justify-content: flex-start;
-}
-
-/* 레이어 부분(콘텐츠) */
-
-.lfe-layer{
-    flex: 0 0 auto;
-}
-.lfe-wrap.on .lfe-layer{
+.lfe-container .lfe-wrap.on .lfe-layer{
     pointer-events: all;
+
 }
 
-.debug .lfe-layer{
-    background-color: #99999999;
-    outline: 1px dotted red;;
-    outline-offset: 0px;
+
+.lfe-container .lfe-wrap[data-lfe-wrap="top"]{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) - var(--wrap-height));
 }
+.lfe-container .lfe-wrap[data-lfe-wrap="bottom"]{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + var(--target-height));
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="left"]{
+    --wrap-left:calc(var(--target-left) - var(--wrap-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="right"]{
+    --wrap-left:calc(var(--target-left) + var(--target-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="center"]{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+
+.lfe-container .lfe-wrap[data-lfe-wrap="top"][data-lfe-wrap-side="in"]{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top));
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="bottom"][data-lfe-wrap-side="in"]{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + var(--target-height) - var(--wrap-height));
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="left"][data-lfe-wrap-side="in"]{
+    --wrap-left:calc(var(--target-left));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap[data-lfe-wrap="right"][data-lfe-wrap-side="in"]{
+    --wrap-left:calc(var(--target-left) + var(--target-width)  - var(--wrap-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+
+/* 고정 설정. data-lfe-wrap ,data-lfe-wrap-side 보다 우선 */
+.lfe-container .lfe-wrap.lfe-wrap-top{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) - var(--wrap-height));
+}
+.lfe-container .lfe-wrap.lfe-wrap-bottom{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + var(--target-height));
+}
+.lfe-container .lfe-wrap.lfe-wrap-left{
+    --wrap-left:calc(var(--target-left) - var(--wrap-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap.lfe-wrap-right{
+    --wrap-left:calc(var(--target-left) + var(--target-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap.lfe-wrap-center{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+
+.lfe-container .lfe-wrap.lfe-wrap-top.lfe-wrap-side-in{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top));
+}
+.lfe-container .lfe-wrap.lfe-wrap-bottom.lfe-wrap-side-in{
+    --wrap-left:calc(var(--target-left) + (var(--target-width) - var(--wrap-width)) / 2);
+    --wrap-top:calc(var(--target-top) + var(--target-height) - var(--wrap-height));
+}
+.lfe-container .lfe-wrap.lfe-wrap-left.lfe-wrap-side-in{
+    --wrap-left:calc(var(--target-left));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+.lfe-container .lfe-wrap.lfe-wrap-right.lfe-wrap-side-in{
+    --wrap-left:calc(var(--target-left) + var(--target-width)  - var(--wrap-width));
+    --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
+}
+
+
 
 
 /* 모션을 위한 추가 처리 */
-.lfe-container .lfe-wrap.lfe-wrap-motion-fade{
-    display: block !important;
+.lfe-container .lfe-wrap.lfe-motion-fade .lfe-layer{
     opacity: 0;
 }
-.lfe-container .lfe-wrap.lfe-wrap-motion-fade.on{
+.lfe-container .lfe-wrap.lfe-motion-fade.on .lfe-layer{
     opacity: 1;
 }
-.lfe-wrap.lfe-wrap-motion-fade.on{
+.lfe-wrap.lfe-motion-fade.on .lfe-layer{
     transition: opacity ease var(--transition-duration);
 }
 
-.lfe-container .lfe-wrap.lfe-wrap-motion-scale{
-    display: block !important;
+.lfe-container .lfe-wrap.lfe-motion-scale  .lfe-layer{
     opacity: 0;
     transform: scale(0);
 }
-.lfe-container .lfe-wrap.lfe-wrap-motion-scale.on{
+.lfe-container .lfe-wrap.lfe-motion-scale.on  .lfe-layer{
     opacity: 1;
     transform: scale(1);
 }
-.lfe-wrap.lfe-wrap-motion-scale.on{
-    transition: opacity ease var(--transition-duration) , transform ease var(--transition-duration);
+.lfe-wrap.lfe-motion-scale.on  .lfe-layer{
+    transition: all ease var(--transition-duration);
 }
+
+
+
+

@@ -68,16 +68,21 @@
             globalThis.lfeFixedIn5 = new LayerForElement(document.querySelector('#wrap-fixed-in-5'));
 
             globalThis.lfeCustom1 = new LayerForElement(document.querySelector('#wrap-custom-1'));
-
-            
-        })
+        });
     </script>
     <style>
         /* 커스텀 예제 */
-        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] { 
-            left:0;right:0;top: 0;bottom: 0; justify-content: center; align-items: flex-end; padding:10px;
+        .lfe-container .lfe-wrap.custom-1 { 
+            display: flex;
+            /* left:var(--target-left); */
+            width:var(--target-width);
+            /* right:var(--target-right); */
+            /* top: var(--target-top); */
+            height:var(--target-height);
+            /* bottom: var(--target-bottom);  */
+            justify-content: center; align-items: flex-end; padding:10px;
         }
-        .lfe-wrap .lfe-pos[data-lfe-pos="custom-1"][data-lfe-pos-side="custom-1"] .lfe-layer{
+        .lfe-container .lfe-wrap.custom-1 .lfe-layer{
             width:100%;height:50%; text-align: center; background-color: red;
             display: flex;
             flex-direction: row;
@@ -88,321 +93,304 @@
         }
 
         /* 커스텀 예제 - 모션*/
-        .lfe-container .lfe-wrap.custom-1{
+        .lfe-container .lfe-wrap.custom-1 .lfe-layer{
             display: block !important;
             opacity: 0;
             transform: scale(0);
             transform-origin: center bottom;
         }
-        .lfe-container .lfe-wrap.custom-1.on{
+        .lfe-container .lfe-wrap.custom-1.on .lfe-layer{
             opacity: 1;
             transform: scale(1);
         }
-        .lfe-wrap.custom-1.on{
+        .lfe-wrap.custom-1.on .lfe-layer{
             transition: all cubic-bezier(1.000, -0.5, 0.150, 2) calc(var(--transition-duration) * 2);
         }
     </style>
 </head>
 <body class="debug" >
-    <div class="container" >
-        <h1>layer for element</h1>
-        <h3></h3>
-        <hr>
-        <button type="button" class="m-1 btn btn-info" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
-        <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
-        <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.hideAll()" > LayerForElement.hideAll() </button>
-        <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.toggleAll()" > LayerForElement.toggleAll() </button>
-        <hr>
-        <div class="text-center">
-            <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.show()">lfe1.show()</button>
-            <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.hide()">lfe1.hide()</button>
-            <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.toggle()">lfe1.toggle()</button>
+    
+    <div class="container-fluid m-0 p-0" >
+        <div class="container" >
+            <h1>layer for element</h1>
+            <h3></h3>
             <hr>
-            <h3> simple(no data-*)</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.hide(this)" >lfe1.hide(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.hide(this)" >lfe2.hide(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button><br>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" >lfe1.toggle(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" >lfe2.toggle(this)</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" >lfe3.toggle(this)</button>
-
+            <button type="button" class="m-1 btn btn-info" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
+            <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
+            <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.hideAll()" > LayerForElement.hideAll() </button>
+            <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.toggleAll()" > LayerForElement.toggleAll() </button>
             <hr>
-            <h3> data-lfe-pos-side="out" (default)</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="out">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="out">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="out">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="out">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="out">data-lfe-pos="center"</button>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="out">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="out">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="out">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="out">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="out">data-lfe-pos="center"</button>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="out">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="out">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="out">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="out">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="out">data-lfe-pos="center"</button>
-            <hr>
-            <h3> data-lfe-pos-side="in"</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="in">data-lfe-pos="center"</button>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="in">data-lfe-pos="center"</button>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="top" data-lfe-pos-side="in">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="right" data-lfe-pos-side="in">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="bottom" data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="left" data-lfe-pos-side="in">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-pos="center" data-lfe-pos-side="in">data-lfe-pos="center"</button>
-            <hr>
-            <h2>small</h2>
-            <h3> data-lfe-pos-side="out"</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="top" data-lfe-pos-side="out">top</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="right" data-lfe-pos-side="out">right</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="bottom" data-lfe-pos-side="out">bottom</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="left" data-lfe-pos-side="out">left</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="center" data-lfe-pos-side="out">center</button>
-            <hr>
-            <h3> data-lfe-pos-side="in"</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="top"  data-lfe-pos-side="in">top</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="right"  data-lfe-pos-side="in">right</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="bottom"  data-lfe-pos-side="in">bottom</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="left"  data-lfe-pos-side="in">left</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-pos="center"  data-lfe-pos-side="in">center</button>
-            <hr>
-            <h3>위치 고정 (버튼에 설정된 값은 무시한다)</h3>
-            <div class="p-3 text-center">
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" 
-                onclick="
-                    lfeFixed1.toggle(this);
-                    lfeFixed2.toggle(this);
-                    lfeFixed3.toggle(this);
-                    lfeFixed4.toggle(this);
-                    lfeFixed5.toggle(this);
-                " 
-                data-lfe-pos="right" style="width:100vh; max-width:400px;height:100vh; max-height:400px;">위치 강제 테스트</button>
+            <div class="text-center">
+                <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.show()">lfe1.show()</button>
+                <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.hide()">lfe1.hide()</button>
+                <button type="button" class="m-1 btn btn-outline-primary" onclick="lfe1.toggle()">lfe1.toggle()</button>
+                <hr>
+                <h3> simple(no data-*)</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" >lfe1.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.show(this)" >lfe2.show(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.show(this)" >lfe3.show(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.hide(this)" >lfe1.hide(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.hide(this)" >lfe2.hide(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.hide(this)" >lfe3.hide(this)</button><br>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" >lfe1.toggle(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" >lfe2.toggle(this)</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" >lfe3.toggle(this)</button>
+    
+                <hr>
+                <h3> data-lfe-wrap-side="out" (default)</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
+                <hr>
+                <h3> data-lfe-wrap-side="in"</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe2.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <hr>
+                <h2>small</h2>
+                <h3> data-lfe-wrap-side="out"</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">top</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">right</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">bottom</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">left</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">center</button>
+                <hr>
+                <h3> data-lfe-wrap-side="in"</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="top"  data-lfe-wrap-side="in">top</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="right"  data-lfe-wrap-side="in">right</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="bottom"  data-lfe-wrap-side="in">bottom</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="left"  data-lfe-wrap-side="in">left</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfe1.show(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in">center</button>
+                <hr>
+                <h3>위치 고정 (버튼에 설정된 값은 무시한다)</h3>
+                <div class="p-3 text-center">
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" 
+                    onclick="
+                        lfeFixed1.toggle(this);
+                        lfeFixed2.toggle(this);
+                        lfeFixed3.toggle(this);
+                        lfeFixed4.toggle(this);
+                        lfeFixed5.toggle(this);
+                    " 
+                    data-lfe-wrap="right" style="width:100vh; max-width:400px;height:100vh; max-height:400px;">위치 강제 테스트</button>
+                </div>
+                <div class="p-3 text-center">
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" 
+                    onclick="
+                        lfeFixedIn1.toggle(this);
+                        lfeFixedIn2.toggle(this);
+                        lfeFixedIn3.toggle(this);
+                        lfeFixedIn4.toggle(this);
+                        lfeFixedIn5.toggle(this);
+                    " 
+                    data-lfe-wrap="right" data-lfe-wrap-side="out" style="width:100vh; max-width:600px;height:100vh; max-height:600px;">위치 강제 테스트 - in</button>
+                </div>
+                <hr>
+                <h3>커스텀</h3>
+                <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.toggle(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in"
+                style="width:100vh; max-width:400px;height:100vh; max-height:400px;">커스텀</button>
+                <hr>
+    
+                <div style="height: 100vh;"></div>
+                <h3>with scroll</h3>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center">data-lfe-wrap="center"</button>
+                <hr>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom"  data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left"  data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <hr>
+    
             </div>
-            <div class="p-3 text-center">
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" 
-                onclick="
-                    lfeFixedIn1.toggle(this);
-                    lfeFixedIn2.toggle(this);
-                    lfeFixedIn3.toggle(this);
-                    lfeFixedIn4.toggle(this);
-                    lfeFixedIn5.toggle(this);
-                " 
-                data-lfe-pos="right" data-lfe-pos-side="out" style="width:100vh; max-width:600px;height:100vh; max-height:600px;">위치 강제 테스트 - in</button>
-            </div>
-            <hr>
-            <h3>커스텀</h3>
-            <button type="button" class="m-1 btn btn-outline-primary btn-sm mx-5" onclick="lfeCustom1.toggle(this)" data-lfe-pos="center"  data-lfe-pos-side="in"
-            style="width:100vh; max-width:400px;height:100vh; max-height:400px;">커스텀</button>
-            <hr>
+        </div>
+        
 
-            <div style="height: 100vh;"></div>
-            <h3>with scroll</h3>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="top">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="right">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="bottom">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="left">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="center">data-lfe-pos="center"</button>
-            <hr>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="top"  data-lfe-pos-side="in">data-lfe-pos="top"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="right"  data-lfe-pos-side="in">data-lfe-pos="right"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="bottom"  data-lfe-pos-side="in">data-lfe-pos="bottom"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="left"  data-lfe-pos-side="in">data-lfe-pos="left"</button>
-            <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-pos="center"  data-lfe-pos-side="in">data-lfe-pos="center"</button>
-            <hr>
-
+        <div class="m-0" style="width: 200vw; height: 200vh; background-color: #9999; padding:20px;">
+            스크롤을 위한 영역
         </div>
     </div>
+
     <div class="lfe-container">
         컨테이너
         <div class="lfe-wrap" id="wrap-1">
-            <div class="lfe-pos">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert('NO.1')">NO.1</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert('NO.1')">NO.1</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap lfe-wrap-motion-fade" id="wrap-2">
-            <div class="lfe-pos">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-warning" onclick="alert('NO.2')">NO.2+FADE</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-motion-fade" id="wrap-2">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-warning" onclick="alert('NO.2')">NO.2+FADE</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap lfe-wrap-motion-scale" id="wrap-3">
-            <div class="lfe-pos">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3+scale</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-motion-scale" id="wrap-3">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3+scale</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="lfe-wrap" id="wrap-fixed-1">
-            <div class="lfe-pos" data-lfe-pos="top">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-top</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-top" id="wrap-fixed-1">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-top</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-2">
-            <div class="lfe-pos" data-lfe-pos="right">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-right</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-right" id="wrap-fixed-2">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-right</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-3">
-            <div class="lfe-pos" data-lfe-pos="bottom">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-bottom</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-bottom" id="wrap-fixed-3">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-bottom</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-4">
-            <div class="lfe-pos" data-lfe-pos="left">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-left</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-left" id="wrap-fixed-4">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-left</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-5">
-            <div class="lfe-pos" data-lfe-pos="center">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-center</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-center" id="wrap-fixed-5">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-center</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="lfe-wrap" id="wrap-fixed-in-1">
-            <div class="lfe-pos" data-lfe-pos="top" data-lfe-pos-side="in">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-top</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        
+        <div class="lfe-wrap lfe-wrap-top lfe-wrap-side-in" id="wrap-fixed-in-1">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-top</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-in-2">
-            <div class="lfe-pos" data-lfe-pos="right" data-lfe-pos-side="in">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-right</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-right lfe-wrap-side-in" id="wrap-fixed-in-2">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-right</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-in-3">
-            <div class="lfe-pos" data-lfe-pos="bottom" data-lfe-pos-side="in">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-bottom</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-bottom lfe-wrap-side-in" id="wrap-fixed-in-3">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-bottom</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-in-4">
-            <div class="lfe-pos" data-lfe-pos="left" data-lfe-pos-side="in">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-left</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-left lfe-wrap-side-in" id="wrap-fixed-in-4">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-left</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lfe-wrap" id="wrap-fixed-in-5">
-            <div class="lfe-pos" data-lfe-pos="center" data-lfe-pos-side="in">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-center</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+        <div class="lfe-wrap lfe-wrap-center lfe-wrap-side-in" id="wrap-fixed-in-5">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">위치 고정-in-center</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <div class="lfe-wrap custom-1" id="wrap-custom-1">
-            <div class="lfe-pos" data-lfe-pos="custom-1" data-lfe-pos-side="custom-1">
-                <div class="lfe-layer" >
-                    <div class="m-1">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">custom</button>
-                            <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
-                        </div>
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">custom</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
