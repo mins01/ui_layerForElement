@@ -70,6 +70,8 @@ class LayerForElement{
         this.lastShownTarget = null;
         this.defLfeWrap = "top";
         this.defLfeWrapSide = "out";
+        this.deflfeWrapCaged = "false";
+        
 
         this.constructor.instances.push(this)
 
@@ -138,7 +140,12 @@ class LayerForElement{
 
         this.wrap.dataset.lfeWrap = this.target.dataset.lfeWrap??this.defLfeWrap;
         this.wrap.dataset.lfeWrapSide = this.target.dataset.lfeWrapSide??this.defLfeWrapSide;
-
+        if(this.target.dataset.lfeWrapCaged !== undefined){
+            this.wrap.dataset.lfeWrapCaged = this.target.dataset.lfeWrapCaged??this.deflfeWrapCaged;
+        }else{
+            delete this.wrap.dataset.lfeWrapCaged;
+        }
+        
         this.wrap.style.setProperty('--target-top',rectTarget.top+'px')
         this.wrap.style.setProperty('--target-left',rectTarget.left+'px')
         this.wrap.style.setProperty('--target-width',rectTarget.width+'px')

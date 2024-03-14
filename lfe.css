@@ -37,9 +37,9 @@
     --wrap-right:calc( var(--wrap-left) + var(--wrap-width));
     --wrap-bottom:calc( var(--wrap-top) + var(--wrap-height));
 
-    left:clamp(calc(0px + var(--wrap-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-margin)));
-    top:clamp(calc(0px + var(--wrap-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-margin)));
+    
 }
+
 .debug .lfe-wrap{
     background-color: #aabbcc33;
     outline: 2px dotted #000;;
@@ -135,6 +135,18 @@
     --wrap-top:calc(var(--target-top) + (var(--target-height) - var(--wrap-height)) / 2);
 }
 
+
+
+/* 위치 설정 */
+.lfe-container .lfe-wrap{
+    left:var(--wrap-left);
+    top:var(--wrap-top);
+}
+.lfe-container .lfe-wrap[data-lfe-wrap-caged]:not([data-lfe-wrap-caged="false"]),
+.lfe-container .lfe-wrap.lfe-wrap-caged{
+    left:clamp(calc(0px + var(--wrap-margin)),var(--wrap-left), calc(100vw - var(--wrap-width) - var(--wrap-margin)));
+    top:clamp(calc(0px + var(--wrap-margin)),var(--wrap-top), calc(100vh - var(--wrap-height) - var(--wrap-margin)));
+}
 
 
 

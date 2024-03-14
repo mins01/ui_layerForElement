@@ -54,7 +54,9 @@
             }
             globalThis.lfe2 = new LayerForElement(document.querySelector('#wrap-2'));
             globalThis.lfe3 = new LayerForElement(document.querySelector('#wrap-3'));
+            globalThis.lfeCaged = new LayerForElement(document.querySelector('#wrap-caged'));
 
+            
             globalThis.lfeFixed1 = new LayerForElement(document.querySelector('#wrap-fixed-1'));
             globalThis.lfeFixed2 = new LayerForElement(document.querySelector('#wrap-fixed-2'));
             globalThis.lfeFixed3 = new LayerForElement(document.querySelector('#wrap-fixed-3'));
@@ -111,9 +113,15 @@
 <body class="debug" >
     
     <div class="container-fluid m-0 p-0" >
-        <div class="container" >
+        <div class="container" style="min-width: 800px;" >
             <h1>layer for element</h1>
-            <h3></h3>
+            <hr>
+            element 에 layer를 위치 시킨다.<br>
+            .lfe-wrap-caged or [data-lfe-wrap-caged] 으로 화면을 벗어나지 않게 할 수 있다.<br>
+            <hr>
+            <div>
+                <a class="btn btn-link" href="old/20240314/index.html">old</a>
+            </div>
             <hr>
             <button type="button" class="m-1 btn btn-info" onclick="document.body.classList.toggle('debug')" > toggle debug </button>
             <button type="button" class="m-1 btn btn-info" onclick="LayerForElement.showAll()" > LayerForElement.showAll() </button>
@@ -159,6 +167,14 @@
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
                 <hr>
+                <h6>lfe-wrap-caged (화면 안에 갇힘)</h6>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="out">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="out">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="out">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="out">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="out">data-lfe-wrap="center"</button>
+
+                <hr>
                 <h3> data-lfe-wrap-side="in"</h3>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
@@ -177,6 +193,13 @@
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
                 <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe3.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <hr>
+                <h6>lfe-wrap-caged (화면 안에 갇힘)</h6>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="top" data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="right" data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="bottom" data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="left" data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfeCaged.toggle(this)" data-lfe-wrap="center" data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
                 <hr>
                 <h2>small</h2>
                 <h3> data-lfe-wrap-side="out"</h3>
@@ -223,19 +246,45 @@
                 <hr>
     
                 <div style="height: 100vh;"></div>
+                
                 <h3>with scroll</h3>
                 <hr>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top">data-lfe-wrap="top"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right">data-lfe-wrap="right"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left">data-lfe-wrap="left"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center">data-lfe-wrap="center"</button>
+                <div style="transform: translateX(+200vw);">
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center">data-lfe-wrap="center"</button>
+                </div>
+                
                 <hr>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom"  data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left"  data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
-                <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                <div style="transform: translateX(+200vw);">
+
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="bottom"  data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="left"  data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap="center"  data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                </div>
+                <h3>with scroll and [data-lfe-wrap-caged]</h3>
+                <hr>
+                <div style="transform: translateX(+200vw);">
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="top">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="right">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="bottom">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="left">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="center">data-lfe-wrap="center"</button>
+                </div>
+                
+                <hr>
+                <div style="transform: translateX(+200vw);">
+
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="top"  data-lfe-wrap-side="in">data-lfe-wrap="top"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="right"  data-lfe-wrap-side="in">data-lfe-wrap="right"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="bottom"  data-lfe-wrap-side="in">data-lfe-wrap="bottom"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="left"  data-lfe-wrap-side="in">data-lfe-wrap="left"</button>
+                    <button type="button" class="m-1 btn btn-outline-primary btn-lg" onclick="lfe1.show(this)" data-lfe-wrap-caged data-lfe-wrap="center"  data-lfe-wrap-side="in">data-lfe-wrap="center"</button>
+                </div>
                 <hr>
     
             </div>
@@ -251,9 +300,9 @@
         컨테이너
         <div class="lfe-wrap" id="wrap-1">
             <div class="lfe-layer" >
-                <div class="m-1">
+                <div class="m-1 text-center" style="width:300px">
                     <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" class="btn btn-primary" onclick="alert('NO.1')">NO.1</button>
+                        <button type="button" class="btn btn-primary" onclick="alert(this.textContent)">NO.1</button>
                         <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
@@ -263,7 +312,7 @@
             <div class="lfe-layer" >
                 <div class="m-1">
                     <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" class="btn btn-warning" onclick="alert('NO.2')">NO.2+FADE</button>
+                        <button type="button" class="btn btn-warning" onclick="alert(this.textContent)">NO.2+FADE</button>
                         <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
@@ -273,12 +322,25 @@
             <div class="lfe-layer" >
                 <div class="m-1">
                     <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" class="btn btn-success" onclick="alert('NO.3')">NO.3+scale</button>
+                        <button type="button" class="btn btn-success" onclick="alert(this.textContent)">NO.3+scale</button>
                         <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="lfe-wrap lfe-wrap-caged" id="wrap-caged">
+            <div class="lfe-layer" >
+                <div class="m-1">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-success" onclick="alert(this.textContent)">NO.caged</button>
+                        <button type="button" class="btn btn-danger" onclick="LayerForElement.hideFromElement(this)">X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
         <div class="lfe-wrap lfe-wrap-top" id="wrap-fixed-1">
             <div class="lfe-layer" >
