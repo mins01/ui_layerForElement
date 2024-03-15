@@ -144,8 +144,8 @@ class LayerForElement{
         // let rectContainer = this.container.getBoundingClientRect();
         let rectTarget = this.target.getBoundingClientRect();
         let rectWrap = this.wrap.getBoundingClientRect();
-        console.log('rectTarget',rectTarget);
-        console.log('rectWrap',rectWrap);
+        // console.log('rectTarget',rectTarget);
+        // console.log('rectWrap',rectWrap);
 
         const wrapFixed = this.wrap.classList.contains('lef-wrap-fixed');
 
