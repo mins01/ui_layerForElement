@@ -50,11 +50,11 @@ class LayerForElement{
             this.syncPosAll();
         })
         window.addEventListener('scroll',(event)=>{
-            console.log('scroll');
+            // console.log('scroll');
             this.syncPosAll();
         })
         window.addEventListener('touchmove',(event)=>{
-            console.log('touchmove');
+            // console.log('touchmove');
             this.syncPosAll();
         })
     }
@@ -109,7 +109,7 @@ class LayerForElement{
         this.lastShownTarget = this.target;     
 
         setTimeout(() => {
-            console.log('on');  
+            // console.log('on');  
             this.wrap.classList.add('on');
             if(this.onshow instanceof Function) this.onshow(this);
         }, 10);
